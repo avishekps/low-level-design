@@ -26,10 +26,14 @@ public class NearestParkingStrategy extends ParkingStrategy {
     }
 
     private Optional<ParkingSlot> findAvailableSlot(ParkingLot parkingLot, VehicleType vehicleType) {
+        Optional<ParkingSlot> availableSlot = Optional.empty();
         for (Map.Entry<Integer, Floor> floorMap : parkingLot.getParkingFloorMap().entrySet()) {
-            return floorMap.getValue().getSlotsMap().values().stream()
+            availableSlot = floorMap.getValue().getSlotsMap().values().stream()
                     .filter(slot -> !slot.isOccupied() && slot.canFitVehicle(vehicleType)).findFirst();
+            if (availableSlot.isPresent()) {
+                break;
+            }
         }
-        return Optional.empty();
+        return availableSlot;
     }
 }
