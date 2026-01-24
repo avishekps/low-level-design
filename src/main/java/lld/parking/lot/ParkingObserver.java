@@ -2,5 +2,5 @@ package lld.parking.lot;
 
 public interface ParkingObserver {
 
-    void notify(Slot slot, Vehicle vehicle);
+    void notify(ParkingSlot slot, Vehicle vehicle);
 }

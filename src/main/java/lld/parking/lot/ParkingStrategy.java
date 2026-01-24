@@ -11,7 +11,7 @@ public abstract class ParkingStrategy {
         this.observerList = observerList;
     }
 
-    void notifyObservers(Slot slot, Vehicle vehicle) {
+    void notifyObservers(ParkingSlot slot, Vehicle vehicle) {
         for (ParkingObserver parkingObserver : observerList) {
             parkingObserver.notify(slot, vehicle);
         }

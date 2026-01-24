@@ -9,7 +9,7 @@ public class ParkingTicket {
 
     private final String vehicleId;
 
-    private final Slot slot;
+    private final String parkingSlotId;
 
     private final LocalDateTime parkingTime;
 
@@ -17,10 +17,10 @@ public class ParkingTicket {
 
     private Double parkingFees;
 
-    public ParkingTicket(final String vehicleId, final Slot slot) {
+    public ParkingTicket(final String vehicleId, final String parkingSlotId) {
         this.id = UUID.randomUUID().toString();
         this.vehicleId = vehicleId;
-        this.slot = slot;
+        this.parkingSlotId = parkingSlotId;
         parkingTime = LocalDateTime.now();
     }
 

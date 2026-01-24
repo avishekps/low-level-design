@@ -12,7 +12,7 @@ public class ParkingAuditTracker implements ParkingObserver {
     }
 
     @Override
-    public void notify(Slot slot, Vehicle vehicle) {
+    public void notify(ParkingSlot slot, Vehicle vehicle) {
         ParkingLotAudit audit = new ParkingLotAudit(vehicle, slot);
         parkingLotAudit.put(vehicle.getId(), audit);
     }

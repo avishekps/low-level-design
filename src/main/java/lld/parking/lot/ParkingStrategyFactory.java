@@ -1,21 +1,25 @@
 package lld.parking.lot;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class ParkingStrategyFactory {
 
-    private Map<VehicleType, ParkingStrategy> parkingStrategyMap;
+    private static final Map<ParkingStrategyType, ParkingStrategy> parkingStrategyMap;
 
-    public ParkingStrategyFactory(final List<ParkingObserver> observers) {
+    static {
         parkingStrategyMap = new HashMap<>();
-        parkingStrategyMap.put(VehicleType.BIKE, new BikeParkingStrategy(observers));
-        parkingStrategyMap.put(VehicleType.CAR, new CarParkingStrategy(observers));
-        parkingStrategyMap.put(VehicleType.TRUCK, new TruckParkingStrategy(observers));
+        parkingStrategyMap.put(ParkingStrategyType.NearestSlot,
+                new NearestParkingStrategy(Collections.singletonList(new ParkingAuditTracker())));
     }
 
-    public ParkingStrategy getParkingStrategy(VehicleType vehicleType) {
-        return parkingStrategyMap.get(vehicleType);
+    private ParkingStrategyFactory() {
+
+    }
+
+    public static ParkingStrategy getParkingStrategy(ParkingStrategyType parkingStrategyType) {
+        return parkingStrategyMap.get(parkingStrategyType);
     }
 }

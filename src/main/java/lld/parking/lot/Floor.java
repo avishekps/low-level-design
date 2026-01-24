@@ -6,21 +6,29 @@ import java.util.stream.Collectors;
 
 public class Floor {
 
-    private final String id;
+    private final Integer id;
 
-    private final Map<String, Slot> slotsMap;
+    private final Map<String, ParkingSlot> slotsMap;
 
-    public Floor(final String id, final Set<Slot> slots) {
+    public Floor(final Integer id, final Set<ParkingSlot> slots) {
         this.id = id;
-        this.slotsMap = slots.stream().sorted(Comparator.comparing(Slot::getId))
-                .collect(Collectors.toMap(Slot::getId, Function.identity(), (oldValue, newValue) -> oldValue, LinkedHashMap::new));
+        this.slotsMap = slots.stream().sorted(Comparator.comparing(ParkingSlot::getId))
+                .collect(Collectors.toMap(ParkingSlot::getId, Function.identity(),
+                        (oldValue, newValue) -> oldValue, LinkedHashMap::new));
     }
 
-    public Map<String, Slot> getSlotsMap() {
+    public Map<String, ParkingSlot> getSlotsMap() {
         return Collections.unmodifiableMap(slotsMap);
     }
 
-    public String getId() {
+    public void addSlot(final ParkingSlot slot) {
+        if (slotsMap.containsKey(slot.getId())) {
+            return;
+        }
+        slotsMap.put(slot.getId(), slot);
+    }
+
+    public Integer getId() {
         return id;
     }
 }

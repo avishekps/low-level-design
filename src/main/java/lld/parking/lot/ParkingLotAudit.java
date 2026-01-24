@@ -6,13 +6,13 @@ public class ParkingLotAudit {
 
     private final Vehicle vehicle;
 
-    private final Slot slot;
+    private final ParkingSlot slot;
 
     private final LocalDateTime parkingTime;
 
     private LocalDateTime parkingEndTime;
 
-    public ParkingLotAudit(final Vehicle vehicle, final Slot slot) {
+    public ParkingLotAudit(final Vehicle vehicle, final ParkingSlot slot) {
         this.vehicle = vehicle;
         this.slot = slot;
         parkingTime = LocalDateTime.now();
